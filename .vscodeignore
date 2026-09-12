@@ -11,7 +11,6 @@ eslint.config.mjs
 pnpm-lock.yaml
 pnpm-workspace.yaml
 tsconfig.json
-vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 *.vsix

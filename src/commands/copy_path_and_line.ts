@@ -23,7 +23,7 @@ async function copyPathAndLine(): Promise<void> {
 	}
 
 	const filePath = vscode.workspace.getWorkspaceFolder(uri)
-		? vscode.workspace.asRelativePath(uri, false)
+		? vscode.workspace.asRelativePath(uri)
 		: uri.fsPath;
 	const reference = createCodeReference(filePath, editor.selection);
 
