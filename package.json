@@ -3,7 +3,7 @@
   "displayName": "Code Relay",
   "description": "Send the right code context to AI",
   "version": "0.0.1",
-  "publisher": "knowckx",
+  "publisher": "Knowckx",
   "license": "MIT",
   "icon": "images/icon.png",
   "repository": {
@@ -22,7 +22,7 @@
     "line-number"
   ],
   "engines": {
-    "vscode": "^1.136.0"
+    "vscode": "^1.78.0"
   },
   "categories": [
     "Other"
@@ -61,7 +61,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "1.136.0",
+    "@types/vscode": "1.78.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "24.x",
     "typescript-eslint": "^8.61.1",

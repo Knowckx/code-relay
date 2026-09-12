@@ -1,9 +1,11 @@
-# Change Log
+# Changelog
 
-All notable changes to the "code-relay" extension will be documented in this file.
+## [0.0.1] - 2026-09-12
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Added
 
-## [Unreleased]
-
-- Initial release
+- 支持复制工作区内文件的相对路径。
+- 支持复制工作区外文件的绝对路径。
+- 支持为多行选区附加从 `1` 开始的行号范围。
+- 添加命令面板、编辑器正文右键菜单和行号右键菜单入口。
+- 添加剪贴板写入结果的状态栏提示。

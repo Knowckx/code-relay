@@ -1,71 +1,77 @@
-# code-relay README
+# Code Relay
 
-This is the README for your extension "code-relay". After writing up a brief description, we recommend including the following sections.
+Send the right code context to AI.
 
-## Features
+Code Relay 将 VS Code 当前文件的位置转换为简洁的文本引用，方便粘贴到 AI 对话、Issue 或代码评审中。
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 功能
 
-For example if there is an image subfolder under your extension project workspace:
+- 工作区内文件复制工作区相对路径。
+- 工作区外文件复制绝对路径。
+- 光标或单行选区只复制路径。
+- 多行选区在路径后附加从 `1` 开始的行号范围。
+- 支持命令面板、编辑器正文右键菜单和行号右键菜单。
+- 复制完成后通过状态栏显示结果。
 
-\!\[feature X\]\(images/feature-x.png\)
+## 使用方式
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. 在 VS Code 中打开一个已保存的文件。
+2. 只复制文件路径时，将光标放在任意位置或选择单行。
+3. 需要行号范围时，选择多行代码。
+4. 执行 `CodeRelay: Copy Path and Line`：
+   - 在命令面板中搜索该命令；或
+   - 在编辑器正文或行号区域右键选择该命令。
+5. 将剪贴板内容粘贴到目标位置。
 
-## Requirements
+## 输出示例
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+工作区内文件：
 
-## Extension Settings
+```text
+src/commands/copy_path_and_line.ts
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+工作区内多行选区：
 
-For example:
+```text
+src/commands/copy_path_and_line.ts:12-18
+```
 
-This extension contributes the following settings:
+工作区外文件：
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```text
+E:\samples\demo.ts
+```
 
-## Known Issues
+工作区外多行选区：
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+```text
+E:\samples\demo.ts:12-18
+```
 
-## Release Notes
+当选区末尾位于下一行第 `0` 列时，该行不会被计入范围。
 
-Users appreciate release notes as you update your extension.
+## 隐私
 
-### 1.0.0
+Code Relay 完全在本地运行：
 
-Initial release of ...
+- 不读取或复制源代码正文。
+- 不连接任何 AI 服务或其他远程服务。
+- 不发送遥测数据。
+- 不保存文件路径或操作历史。
+- 只将生成的位置引用写入系统剪贴板。
 
-### 1.0.1
+## 要求与限制
 
-Fixed issue #.
+- 需要 VS Code `1.78.0` 或更高版本。
+- 未保存的 Untitled 文件没有稳定路径，使用前需要先保存。
+- 当前只处理活动编辑器的主选区。
+- 当前不提供扩展设置。
 
-### 1.1.0
+## 反馈
 
-Added features X, Y, and Z.
+发现问题请提交到 [GitHub Issues](https://github.com/Knowckx/code-relay/issues)。
 
----
+## 许可证
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT](LICENSE)
