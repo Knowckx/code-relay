@@ -3,8 +3,26 @@
   "displayName": "Code Relay",
   "description": "Send the right code context to AI",
   "version": "0.0.1",
+  "publisher": "knowckx",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Knowckx/code-relay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Knowckx/code-relay/issues"
+  },
+  "homepage": "https://github.com/Knowckx/code-relay#readme",
+  "keywords": [
+    "ai",
+    "code-context",
+    "clipboard",
+    "file-path",
+    "line-number"
+  ],
   "engines": {
-    "vscode": "^1.137.0"
+    "vscode": "^1.136.0"
   },
   "categories": [
     "Other"
@@ -14,10 +32,25 @@
   "contributes": {
     "commands": [
       {
-        "command": "code-relay.helloWorld",
-        "title": "Hello World"
+        "command": "code-relay.copyPathAndLine",
+        "title": "Copy Path and Line",
+        "category": "CodeRelay"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "code-relay.copyPathAndLine",
+          "when": "editorTextFocus"
+        }
+      ],
+      "editor/lineNumber/context": [
+        {
+          "command": "code-relay.copyPathAndLine",
+          "when": "editorTextFocus"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
@@ -28,7 +61,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.137.0",
+    "@types/vscode": "1.136.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "24.x",
     "typescript-eslint": "^8.61.1",

@@ -1,15 +1,22 @@
 import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
+import { createCodeReference } from '../commands/copy_path_and_line';
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+suite('Copy Path and Line', () => {
+	test('returns only the path for a cursor or single-line selection', () => {
+		assert.strictEqual(createCodeReference('src/extension.ts', new vscode.Selection(4, 2, 4, 2)), 'src/extension.ts');
+		assert.strictEqual(createCodeReference('src/extension.ts', new vscode.Selection(4, 2, 4, 8)), 'src/extension.ts');
+	});
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
+	test('appends one-based line numbers for a multi-line selection', () => {
+		const selection = new vscode.Selection(2, 3, 5, 4);
+
+		assert.strictEqual(createCodeReference('src/extension.ts', selection), 'src/extension.ts:3-6');
+	});
+
+	test('excludes an unselected line when the selection ends at column zero', () => {
+		const selection = new vscode.Selection(2, 0, 5, 0);
+
+		assert.strictEqual(createCodeReference('src/extension.ts', selection), 'src/extension.ts:3-5');
 	});
 });

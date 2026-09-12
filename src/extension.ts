@@ -1,26 +1,10 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { registerCopyPathAndLineCommand } from './commands/copy_path_and_line';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+/** 注册 CodeRelay 提供的全部命令。 */
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "code-relay" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('code-relay.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Code Relay!');
-	});
-
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(registerCopyPathAndLineCommand());
 }
 
-// This method is called when your extension is deactivated
+/** 停用扩展；当前没有需要主动释放的额外资源。 */
 export function deactivate() {}
