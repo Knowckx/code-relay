@@ -3,12 +3,12 @@ import * as vscode from 'vscode';
 const commandId = 'code-relay.copyPathAndLine'; // package.json 中对应的命令 ID。
 const statusDuration = 3000; // 状态栏消息显示时长，单位为毫秒。
 
-/** 注册复制文件路径和多行范围的命令。 */
+/** 注册复制文件路径和行号的命令。 */
 export function registerCopyPathAndLineCommand(): vscode.Disposable {
 	return vscode.commands.registerCommand(commandId, copyPathAndLine);
 }
 
-/** 复制活动编辑器的路径；多行选区会附加行号范围。 */
+/** 复制活动编辑器的路径和当前行或选区行号。 */
 async function copyPathAndLine(): Promise<void> {
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
@@ -35,7 +35,7 @@ async function copyPathAndLine(): Promise<void> {
 	}
 }
 
-/** 生成路径引用；只有实际跨越多行的选区才附加行号范围。 */
+/** 生成路径引用；光标或单行选区使用单个行号，多行选区使用行号范围。 */
 export function createCodeReference(filePath: string, selection: vscode.Selection): string {
 	let endLine = selection.end.line;
 	if (!selection.isEmpty && selection.end.character === 0) {
@@ -43,7 +43,7 @@ export function createCodeReference(filePath: string, selection: vscode.Selectio
 	}
 
 	if (selection.start.line >= endLine) {
-		return filePath;
+		return `${filePath}:${selection.start.line + 1}`;
 	}
 
 	return `${filePath}:${selection.start.line + 1}-${endLine + 1}`;
